@@ -10,10 +10,15 @@ var Game = new function()
         this.playerOffset =40;
         this.points =0;
         this.canvasMultiplier =1;
+        this.setupMobile();
         if(!this.context) {return alert('Please upgrade your browser!');}
         
         this.setupInput();
-        this.setBoard(4,new TouchControls());
+        if(this.mobile){
+            this.playerOffset =0;
+            this.setBoard(4,new TouchControls());
+        }
+       
         this.loop();
         
         SpriteSheet.load(sprite_data,callBack);
@@ -61,6 +66,52 @@ var Game = new function()
 
   this.setBoard = function(num,board){
       boards[num] = board;
+  }
+
+  this.setupMobile = function(){
+      var container = document.getElementById('container'),
+        hastouch = ('ontouchstart' in window),
+        w = window.innerWidth,
+        h = window.innerHeight;
+
+        if(hastouch)
+        {
+            this.mobile= true;
+        }
+
+        if(screen.width >=1280 || !touch){return false;}
+
+        if(w>h){
+            alert("Please rotate the device and click OK");
+             w = window.innerWidth,
+             h = window.innerHeight;
+             return this.setupMobile();
+        }
+
+        container.style.height =h*2 +"px";
+        window.scrollTo(0,1);
+      
+        h = window.innerHeight + 2;
+        container.style.height = h + "px";
+        container.style.width = w + "px";
+        container.style.padding = 0;
+
+        if(h >= this.canvas.height * 1.75 || w >= this.canvas.height * 1.75) {
+          this.canvasMultiplier = 2;
+          this.canvas.width = w / 2;
+          this.canvas.height = h / 2;
+          this.canvas.style.width = w + "px";
+          this.canvas.style.height = h + "px";
+        } else {
+          this.canvas.width = w;
+          this.canvas.height = h;
+        }
+
+        this.canvas.style.position='absolute';
+        this.canvas.style.left="0px";
+        this.canvas.style.top="0px";
+
+
   }
 
 }
@@ -222,6 +273,7 @@ var Sprite = function(){
 
 var TouchControls = function(){
     var gutterWidth = 10;
+    this.bypassYaxisConstraint = true;
     var unitWidth = Game.width/4;
     var blockWidth = unitWidth - gutterWidth;
     var blockheight = Game.playerOffset;
@@ -263,7 +315,7 @@ var TouchControls = function(){
           touch = e.targetTouches[i];
           x= touch.pageX /Game.canvasMultiplier - Game.canvas.offsetLeft;
           y= touch.pageY /Game.canvasMultiplier - Game.canvas.offsetTop;
-          if(y > Game.height - blockheight)
+          if(y > Game.height - blockheight || this.bypassYaxisConstraint)
             {if(x < unitWidth)
             {
                Game.keys['left'] = true;
@@ -284,7 +336,7 @@ var TouchControls = function(){
             touch = e.changedTouches[i];
             x= touch.pageX /Game.canvasMultiplier - Game.canvas.offsetLeft;
           y= touch.pageY /Game.canvasMultiplier - Game.canvas.offsetTop;
-          if(y > Game.height - blockheight)
+          if(y > Game.height - blockheight || this.bypassYaxisConstraint)
           {
             if(e.type=='touchstart' || e.type =='touchend')
             {
