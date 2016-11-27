@@ -1,0 +1,14 @@
+{
+    "name": "space-attack",
+    "version": "1.0.0",
+    "author": "Arun Babu Madhavan",
+    "description": "Js Basics",
+    "scripts": {
+      "start": "npm run lite -w",
+     "lite": "lite-server"
+    },
+    "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+    
+}
