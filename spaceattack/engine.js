@@ -7,7 +7,7 @@ var Game = new function()
         this.context = this.canvas.getContext("2d");
         this.height = this.canvas.height;
         this.width = this.canvas.width;
-        this.playerOffset =40;
+        this.playerOffset =0;
         this.points =0;
         this.canvasMultiplier =1;
         this.setupMobile();
@@ -15,7 +15,7 @@ var Game = new function()
         
         this.setupInput();
         if(this.mobile){
-            this.playerOffset =0;
+            this.playerOffset =40;
             this.setBoard(4,new TouchControls());
         }
        
@@ -273,7 +273,7 @@ var Sprite = function(){
 
 var TouchControls = function(){
     var gutterWidth = 10;
-    this.bypassYaxisConstraint = true;
+    var bypassYaxisConstraint = true;
     var unitWidth = Game.width/4;
     var blockWidth = unitWidth - gutterWidth;
     var blockheight = Game.playerOffset;
@@ -302,7 +302,7 @@ var TouchControls = function(){
     this.drawSquare(ctx,unitWidth + gutterWidth,yLoc,"\u25C9",Game.keys['fire'],true);
 
     ctx.restore();
-  };
+      };
 
   this.trackTouch = function(e){
       var touch,x;
@@ -315,7 +315,7 @@ var TouchControls = function(){
           touch = e.targetTouches[i];
           x= touch.pageX /Game.canvasMultiplier - Game.canvas.offsetLeft;
           y= touch.pageY /Game.canvasMultiplier - Game.canvas.offsetTop;
-          if(y > Game.height - blockheight || this.bypassYaxisConstraint)
+          if(y > Game.height - blockheight || bypassYaxisConstraint)
             {if(x < unitWidth)
             {
                Game.keys['left'] = true;
@@ -336,7 +336,7 @@ var TouchControls = function(){
             touch = e.changedTouches[i];
             x= touch.pageX /Game.canvasMultiplier - Game.canvas.offsetLeft;
           y= touch.pageY /Game.canvasMultiplier - Game.canvas.offsetTop;
-          if(y > Game.height - blockheight || this.bypassYaxisConstraint)
+          if(y > Game.height - blockheight || bypassYaxisConstraint)
           {
             if(e.type=='touchstart' || e.type =='touchend')
             {

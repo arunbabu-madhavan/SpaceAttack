@@ -65,7 +65,7 @@ var OBJECT_PLAYER = 1,
         board.add(new Level(levels.level1,winGame));
         board.add(new PlayerShip(playerships.ship1));
         Game.setBoard(3,board);
-        Game.setBoard(4,new GamePoints());
+        Game.setBoard(5,new GamePoints());
     }
     var loseGame = function() {
         Game.setBoard(3,new TitleScreen("You lose!","Press Fire to play again...",playGame));
@@ -152,7 +152,7 @@ var PlayerShip = function(ship){
          this.reload-=dt;
          if(Game.keys['fire'] && this.reload <=0)
          {
-             
+             Game.keys['fire']=false;
              this.reload = this.reloadTime;
              this.board.add(new PlayerMissile(this.x,this.y+this.h/2,missileSilo.missile1));
              this.board.add(new PlayerMissile(this.x+this.w,this.y+this.h/2,missileSilo.missile1));
