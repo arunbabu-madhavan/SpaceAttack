@@ -79,7 +79,7 @@ var Game = new function()
             this.mobile= true;
         }
 
-        if(screen.width >=1280 || !touch){return false;}
+        if(screen.width >=1280 || !hastouch){return false;}
 
         if(w>h){
             alert("Please rotate the device and click OK");
