@@ -82,6 +82,7 @@ var Starfield = function(speed,opacity,numStars,clear){
     var speed = speed;
     var starCanvas = document.createElement("canvas");
     var starContext = starCanvas.getContext("2d");
+    
     starCanvas.width = Game.width;
     starCanvas.height = Game.height;
 
