@@ -10,25 +10,25 @@ var sprites = {
             }
 
 var playerships = {
-    ship1:{sprite:'ship',velocity:200,reloadTime:0.25,health:1000}
+    ship1:{sprite:'ship',velocity:250,reloadTime:0.25,health:1000}
 }
 
 var missileSilo = {
     missile1:{velocity:700,sprite:'missile',damage:9},
-    missile2:{velocity:200,sprite:'enemy_missile',damage:15}
+    missile2:{velocity:150,sprite:'enemy_missile',damage:15}
 }
 
 var enemies = {
   straight: { x: 0,  y: -50, sprite: 'enemy_ship', health: 10, 
               E: 110 ,damage:500,points:200,reloadTime:0.75 },
   ltr:      { x: 0,   y: -100, sprite: 'enemy_purple', health: 10, 
-              B: 75, C: 1, E: 100, missiles: 2 ,damage:500,points:300,reloadTime:2 },
+              B: 75, C: 1, E: 100, missiles: 2 ,damage:500,points:300,reloadTime:1.5 },
   circle:   { x: 250,   y: -50, sprite: 'enemy_circle', health: 10, 
-              A: 0,  B: -100, C: 1, E: 20, F: 100, G: 1, H: Math.PI/2 ,damage:500,points:250,reloadTime:1.5},
+              A: 0,  B: -100, C: 1, E: 20, F: 100, G: 1, H: Math.PI/2 ,damage:500,points:250,reloadTime:2.0},
   wiggle:   { x: 100, y: -50, sprite: 'enemy_bee', health: 20, 
-              B: 50, C: 4, E: 100, firePercentage: 0.04, missiles: 2,damage:500 ,points:100,reloadTime:1.5},
+              B: 50, C: 4, E: 100, firePercentage: 0.04, missiles: 2,damage:500 ,points:100,reloadTime:2.0},
   step:     { x: 0,   y: -50, sprite: 'enemy_circle', health: 10,
-              B: 150, C: 1.2, E: 75 ,damage:200,points:900,reloadTime:1.5}
+              B: 150, C: 1.2, E: 75 ,damage:200,points:900,reloadTime:1.8}
 };
 
 var levels = {
